@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sparkzy | Elite Minecraft Developer</title>
 
+<link rel="icon" type="image/png" href="https://cdn.discordapp.com/attachments/1381848763798261900/1478040548970336520/pfp.jpg">
+
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
@@ -64,6 +66,14 @@ z-index:-1;
 100%{transform:translate(300px,300px);}
 }
 
+/* ===== PARTICLES ===== */
+canvas{
+position:fixed;
+top:0;
+left:0;
+z-index:-2;
+}
+
 /* ===== NAV ===== */
 nav{
 position:fixed;
@@ -71,14 +81,10 @@ width:100%;
 padding:20px 60px;
 display:flex;
 justify-content:space-between;
+align-items:center;
 background:rgba(0,0,0,0.6);
 backdrop-filter:blur(10px);
 z-index:1000;
-}
-
-nav h2{
-font-family:'Orbitron',sans-serif;
-color:#ff3c00;
 }
 
 nav a{
@@ -102,7 +108,7 @@ justify-content:center;
 }
 
 h1{
-font-size:60px;
+font-size:55px;
 font-family:'Orbitron',sans-serif;
 color:#ff3c00;
 }
@@ -146,14 +152,6 @@ border:1px solid #ff3c00;
 border-radius:30px;
 }
 
-/* ===== PARTICLES ===== */
-canvas{
-position:fixed;
-top:0;
-left:0;
-z-index:-2;
-}
-
 /* ===== FOOTER ===== */
 footer{
 text-align:center;
@@ -165,6 +163,7 @@ background:black;
 
 <body>
 
+<!-- LOADER -->
 <div id="loader">
 <div class="loader-text">Loading Sparkzy...</div>
 </div>
@@ -172,8 +171,14 @@ background:black;
 <div class="glow"></div>
 <canvas id="particles"></canvas>
 
+<!-- NAVBAR -->
 <nav>
-<h2>Sparkzy</h2>
+<div style="display:flex;align-items:center;gap:12px;">
+<img src="https://cdn.discordapp.com/attachments/1381848763798261900/1478040548970336520/pfp.jpg" 
+style="height:45px;width:45px;border-radius:50%;border:2px solid #ff3c00;">
+<h2 style="color:#ff3c00;font-family:'Orbitron',sans-serif;">Sparkzy</h2>
+</div>
+
 <div>
 <a href="#skills">Skills</a>
 <a href="#about">About</a>
@@ -181,36 +186,40 @@ background:black;
 </div>
 </nav>
 
+<!-- HERO -->
 <section>
-<h1>Elite Minecraft Developer</h1>
+<h1><span id="typing"></span></h1>
 <p>
-Professional developer focused on high-performance Minecraft servers,
-custom plugin systems, and secure backend architecture.
+Professional Minecraft Developer focused on high-performance server systems,
+custom plugins, optimization, and secure backend infrastructure.
 </p>
 <a href="#contact" class="btn">Hire Me</a>
 </section>
 
+<!-- SKILLS -->
 <section id="skills">
 <h2>My Skills</h2>
 <div class="skills">
-<span>Java</span>
+<span>Java Development</span>
 <span>Spigot / Paper API</span>
-<span>Custom Plugins</span>
-<span>Optimization</span>
-<span>Security Systems</span>
+<span>Custom Plugin Systems</span>
+<span>Server Optimization</span>
+<span>Security Setup</span>
 <span>Discord Integration</span>
 </div>
 </section>
 
+<!-- ABOUT -->
 <section id="about">
 <h2>Professional Experience</h2>
 <p>
 Worked with Token SMP (Public Server), StrengthCloud.xyz Hosting,
-Cortex MC, BleedCraft and Arix MC. Specialized in building scalable,
-secure and optimized server systems.
+Cortex MC, BleedCraft, and Arix MC. Specialized in scalable,
+secure and optimized Minecraft server development.
 </p>
 </section>
 
+<!-- CONTACT -->
 <section id="contact">
 <h2>Contact Me</h2>
 <p>📧 netherrackplayz@gmail.com</p>
@@ -223,10 +232,22 @@ secure and optimized server systems.
 </footer>
 
 <script>
-// LOADER
-window.onload = function(){
-document.getElementById("loader").style.display="none";
+// LOADER + TYPING
+const text = "Elite Minecraft Developer";
+let index = 0;
+
+function typeEffect() {
+  if (index < text.length) {
+    document.getElementById("typing").innerHTML += text.charAt(index);
+    index++;
+    setTimeout(typeEffect, 70);
+  }
 }
+
+window.onload = function(){
+  document.getElementById("loader").style.display="none";
+  typeEffect();
+};
 
 // PARTICLES
 const canvas = document.getElementById("particles");
